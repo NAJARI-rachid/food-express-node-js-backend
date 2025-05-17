@@ -1,0 +1,33 @@
+{
+  "type": "Compass Connections",
+  "version": {
+    "$numberInt": "1"
+  },
+  "connections": [
+    {
+      "id": "49b7b57e-f1a7-43af-bbd8-05dd444cb51a",
+      "lastUsed": {
+        "$date": {
+          "$numberLong": "1747259557878"
+        }
+      },
+      "favorite": {
+        "name": "Rachid"
+      },
+      "savedConnectionType": "recent",
+      "connectionOptions": {
+        "connectionString": "mongodb://localhost:27017/",
+        "oidc": {
+          "serializedState": "eyJvaWRjUGx1Z2luU3RhdGVWZXJzaW9uIjowLCJzdGF0ZSI6W119"
+        }
+      }
+    }
+  ],
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.15.0",
+    "swagger-ui-express": "^5.0.1"
+  }
+}

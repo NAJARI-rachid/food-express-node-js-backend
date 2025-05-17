@@ -1,0 +1,270 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "FoodExpress API",
+      "version": "1.0.0",
+      "description": "API RESTful pour gérer les utilisateurs, les restaurants et les menus."
+    },
+    "servers": [
+      {
+        "url": "http://localhost:8080"
+      }
+    ],
+    "paths": {
+      "/users": {
+        "post": {
+          "summary": "Créer un nouvel utilisateur",
+          "tags": ["Users"],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Utilisateur créé avec succès"
+            }
+          }
+        },
+        "get": {
+          "summary": "Liste tous les utilisateurs (admin uniquement)",
+          "tags": ["Users"],
+          "security": [{ "bearerAuth": [] }],
+          "responses": {
+            "200": {
+              "description": "Liste des utilisateurs"
+            }
+          }
+        }
+      },
+      "/users/{id}": {
+        "get": {
+          "summary": "Afficher un utilisateur spécifique (admin ou lui-même)",
+          "tags": ["Users"],
+          "security": [{ "bearerAuth": [] }],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": { "type": "string" }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Détails de l'utilisateur"
+            }
+          }
+        },
+        "put": {
+          "summary": "Mettre à jour un utilisateur (admin ou lui-même)",
+          "tags": ["Users"],
+          "security": [{ "bearerAuth": [] }],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": { "type": "string" }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/User" }
+              }
+            }
+          },
+          "responses": {
+            "200": { "description": "Utilisateur mis à jour" }
+          }
+        },
+        "delete": {
+          "summary": "Supprimer un utilisateur (admin ou lui-même)",
+          "tags": ["Users"],
+          "security": [{ "bearerAuth": [] }],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": { "type": "string" }
+            }
+          ],
+          "responses": {
+            "200": { "description": "Utilisateur supprimé" }
+          }
+        }
+      },
+      "/restaurants": {
+        "get": {
+          "summary": "Lister tous les restaurants",
+          "tags": ["Restaurants"],
+          "parameters": [
+            { "name": "sortBy", "in": "query", "schema": { "type": "string" } },
+            { "name": "page", "in": "query", "schema": { "type": "integer" } },
+            { "name": "limit", "in": "query", "schema": { "type": "integer" } }
+          ],
+          "responses": {
+            "200": { "description": "Liste des restaurants" }
+          }
+        },
+        "post": {
+          "summary": "Créer un restaurant (admin seulement)",
+          "tags": ["Restaurants"],
+          "security": [{ "bearerAuth": [] }],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Restaurant" }
+              }
+            }
+          },
+          "responses": {
+            "201": { "description": "Restaurant créé" }
+          }
+        }
+      },
+      "/restaurants/{id}": {
+        "put": {
+          "summary": "Mettre à jour un restaurant (admin)",
+          "tags": ["Restaurants"],
+          "security": [{ "bearerAuth": [] }],
+          "parameters": [
+            { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Restaurant" }
+              }
+            }
+          },
+          "responses": {
+            "200": { "description": "Restaurant mis à jour" }
+          }
+        },
+        "delete": {
+          "summary": "Supprimer un restaurant (admin)",
+          "tags": ["Restaurants"],
+          "security": [{ "bearerAuth": [] }],
+          "parameters": [
+            { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
+          ],
+          "responses": {
+            "200": { "description": "Restaurant supprimé" }
+          }
+        }
+      },
+      "/menus": {
+        "get": {
+          "summary": "Lister les menus",
+          "tags": ["Menus"],
+          "parameters": [
+            { "name": "sortBy", "in": "query", "schema": { "type": "string" } },
+            { "name": "page", "in": "query", "schema": { "type": "integer" } },
+            { "name": "limit", "in": "query", "schema": { "type": "integer" } }
+          ],
+          "responses": {
+            "200": { "description": "Liste des menus" }
+          }
+        },
+        "post": {
+          "summary": "Créer un menu (admin seulement)",
+          "tags": ["Menus"],
+          "security": [{ "bearerAuth": [] }],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Menu" }
+              }
+            }
+          },
+          "responses": {
+            "201": { "description": "Menu créé" }
+          }
+        }
+      },
+      "/menus/{id}": {
+        "put": {
+          "summary": "Mettre à jour un menu (admin)",
+          "tags": ["Menus"],
+          "security": [{ "bearerAuth": [] }],
+          "parameters": [
+            { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Menu" }
+              }
+            }
+          },
+          "responses": {
+            "200": { "description": "Menu mis à jour" }
+          }
+        },
+        "delete": {
+          "summary": "Supprimer un menu (admin)",
+          "tags": ["Menus"],
+          "security": [{ "bearerAuth": [] }],
+          "parameters": [
+            { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }
+          ],
+          "responses": {
+            "200": { "description": "Menu supprimé" }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "User": {
+          "type": "object",
+          "properties": {
+            "email": { "type": "string" },
+            "username": { "type": "string" },
+            "password": { "type": "string" },
+            "role": { "type": "string", "enum": ["user", "admin"] }
+          }
+        },
+        "Restaurant": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string" },
+            "address": { "type": "string" },
+            "phone": { "type": "string" },
+            "opening_hours": { "type": "string" }
+          }
+        },
+        "Menu": {
+          "type": "object",
+          "properties": {
+            "restaurant_id": { "type": "string" },
+            "name": { "type": "string" },
+            "description": { "type": "string" },
+            "price": { "type": "number" },
+            "category": { "type": "string" }
+          }
+        }
+      },
+      "securitySchemes": {
+        "bearerAuth": {
+          "type": "http",
+          "scheme": "bearer",
+          "bearerFormat": "JWT"
+        }
+      }
+    }
+  }
+  
